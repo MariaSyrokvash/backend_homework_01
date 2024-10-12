@@ -1,18 +1,18 @@
 import {req} from './test-helpers'
 import {setDB} from '../src/db/db'
 import {dataset1} from './datasets'
-import {SETTINGS} from '../src/settings'
+import {CONFIG} from "../src/config";
 
 describe('/videos', () => {
-    // beforeAll(async () => { // очистка базы данных перед началом тестирования
-    //     setDB()
-    // })
+    beforeAll(async () => { // очистка базы данных перед началом тестирования
+        setDB()
+    })
 
     it('should get empty array', async () => {
         // setDB() // очистка базы данных если нужно
 
         const res = await req
-            .get(SETTINGS.PATH.VIDEOS)
+            .get(CONFIG.PATH.VIDEOS)
             .expect(200) // проверяем наличие эндпоинта
 
         console.log(res.body) // можно посмотреть ответ эндпоинта
@@ -23,7 +23,7 @@ describe('/videos', () => {
         // setDB(dataset1) // заполнение базы данных начальными данными если нужно
 
         const res = await req
-            .get(SETTINGS.PATH.VIDEOS)
+            .get(CONFIG.PATH.VIDEOS)
             .expect(200)
 
         console.log(res.body)
@@ -41,7 +41,7 @@ describe('/videos', () => {
         }
 
         const res = await req
-            .post(SETTINGS.PATH.VIDEOS)
+            .post(CONFIG.PATH.VIDEOS)
             .send(newVideo) // отправка данных
             .expect(201)
 
@@ -53,7 +53,7 @@ describe('/videos', () => {
         setDB(dataset1)
 
         const res = await req
-            .get(SETTINGS.PATH.VIDEOS + '/1')
+            .get(CONFIG.PATH.VIDEOS + '/1')
             .expect(404) // проверка на ошибку
 
         console.log(res.body)

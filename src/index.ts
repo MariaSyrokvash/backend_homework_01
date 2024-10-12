@@ -1,6 +1,6 @@
 import {app} from './app'
-import {SETTINGS} from './settings'
+import {CONFIG} from "./config";
 
-app.listen(SETTINGS.PORT, () => {
-    console.log('...server started in port ' + SETTINGS.PORT)
+app.listen(CONFIG.PORT, () => {
+    console.log('...server started in port ' + CONFIG.PORT)
 })

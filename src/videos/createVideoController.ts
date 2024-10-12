@@ -1,42 +1,65 @@
 import {Response, Request} from 'express'
-import {db} from '../db/db'
-import {InputVideoType, Resolutions} from "../types/video-types";
-import {OutputErrorsType} from "../types/output-errors-type";
 
-const inputValidation = (video: InputVideoType) => {
-    const errors: OutputErrorsType = { // объект для сбора ошибок
+import {db} from '../db/db'
+
+import {ErrorMessages} from "../constants/errorMessage.constants";
+import {HttpStatuses} from "../constants/httpStatusCode.constants";
+import {MaxLengthVideoAuthor, MaxLengthVideoTitle} from "../constants/validate.constants";
+
+import {OutputErrorsType} from "../types/output-errors-type";
+import {InputVideoBodyType, OutputVideoType, Resolutions} from "../types/video-types";
+
+
+const inputValidation = (video: InputVideoBodyType) => {
+    const errors: OutputErrorsType = {
         errorsMessages: []
     }
-// ...
-    if (!Array.isArray(video.availableResolution)
-        || video.availableResolution.find(p => !Resolutions[p])
-    ) {
+
+    if (!Array.isArray(video.availableResolution) || video.availableResolution.find(r => !Resolutions[r])) {
         errors.errorsMessages.push({
-            message: 'error!!!!', field: 'availableResolution'
+            message: ErrorMessages.UnknownError, field: 'availableResolution'
         })
     }
+
+    if (!video.title || !video.title.trim() || video.title.length > MaxLengthVideoTitle) {
+        errors.errorsMessages.push({
+            message: ErrorMessages.UnknownError, field: 'title'
+        })
+    }
+
+    if (!video.author || !video.author.trim() || video.author.length > MaxLengthVideoAuthor) {
+        errors.errorsMessages.push({
+            message: ErrorMessages.UnknownError, field: 'author'
+        })
+    }
+
     return errors
 }
 
-export const createVideoController = (req: Request<any, any, InputVideoType>, res: Response<any /*OutputVideoType*/ | OutputErrorsType>) => {
+export const createVideoController = (req: Request<any, any, InputVideoBodyType>, res: Response<OutputVideoType | OutputErrorsType>) => {
     const errors = inputValidation(req.body)
-    if (errors.errorsMessages.length) { // если есть ошибки - отправляем ошибки
-        res
-            .status(400)
-            .json(errors)
+    if (errors.errorsMessages.length) {
+        res.status(HttpStatuses.BadRequest400).json(errors)
         return
-        // return res.status(400).json(errors)
     }
 
-    // если всё ок - добавляем видео
-    const newVideo: any /*VideoDBType*/ = {
+    const currentDate = new Date();
+    const publicationDate = new Date(currentDate);
+
+    publicationDate.setDate(publicationDate.getDate() + 1);
+
+    const newVideo: OutputVideoType = {
         ...req.body,
         id: Date.now() + Math.random(),
-        // ...
+        canBeDownloaded: false, // Default value
+        minAgeRestriction: null, //  Default value
+        createdAt: currentDate.toISOString(),
+        publicationDate: publicationDate.toISOString(),
     }
+
     db.videos = [...db.videos, newVideo]
 
-    res
-        .status(201)
-        .json(newVideo)
+    console.log(db.videos, 'db.videos')
+
+    res.status(HttpStatuses.Created201).json(newVideo)
 }

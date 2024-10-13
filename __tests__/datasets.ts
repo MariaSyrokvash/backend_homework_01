@@ -1,7 +1,7 @@
 import {DBType} from "../src/db/db";
 import {OutputVideoType, Resolutions} from "../src/types/video-types";
 
-export const video1: OutputVideoType = {
+export const mockVideo: OutputVideoType = {
     id: Date.now() + Math.random(),
     title: 't' + Date.now() + Math.random(),
     author: 'a' + Date.now() + Math.random(),
@@ -14,5 +14,5 @@ export const video1: OutputVideoType = {
 
 
 export const dataset1: DBType = {
-    videos: [video1],
+    videos: [mockVideo],
 }

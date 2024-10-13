@@ -31,7 +31,6 @@ export type InputVideoBodyType = {
     availableResolution: Resolutions[]
 }
 
-
 export type UpdateVideoInputModel = {
     title: string
     author: string

@@ -3,6 +3,8 @@ import {Router} from 'express'
 import {getVideoController} from "./getVideoController";
 import {getVideosController} from './getVideosController'
 import {createVideoController} from "./createVideoController";
+import {updateVideoController} from "./updateVideoController";
+import {deleteVideoController} from "./deleteVideoController";
 
 
 export const videosRouter = Router()
@@ -15,7 +17,9 @@ videosRouter.get('/:id', getVideoController)
 videosRouter.post('/', createVideoController)
 
 // PUT
+videosRouter.put('/:id', updateVideoController)
 
 // DELETE
-// videosRouter.delete('/:id', deleteVideoController)
+videosRouter.delete('/:id', deleteVideoController)
+
 

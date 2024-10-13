@@ -31,3 +31,13 @@ export type InputVideoBodyType = {
     availableResolution: Resolutions[]
 }
 
+
+export type UpdateVideoInputModel = {
+    title: string
+    author: string
+    availableResolution: Resolutions[]
+    canBeDownloaded: boolean
+    minAgeRestriction: null | number
+    publicationDate: string
+}
+

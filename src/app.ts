@@ -1,9 +1,10 @@
 import express from 'express'
 import cors from 'cors'
 
-import {videosRouter} from "./videos";
 import {CONFIG} from "./config";
 
+import {testRouter} from "./controllers/test";
+import {videosRouter} from "./controllers/videos";
 
 export const app = express() // создать приложение
 
@@ -16,3 +17,4 @@ app.get('/', (req, res) => {
 })
 
 app.use(CONFIG.PATH.VIDEOS, videosRouter)
+app.use(CONFIG.PATH.TEST, testRouter)

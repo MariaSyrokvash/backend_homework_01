@@ -1,13 +1,13 @@
 import {Response, Request} from 'express'
 
-import {db} from '../db/db'
+import {db} from '../../db/db'
 
-import {ErrorMessages} from "../constants/errorMessage.constants";
-import {HttpStatuses} from "../constants/httpStatusCode.constants";
-import {MaxLengthVideoAuthor, MaxLengthVideoTitle} from "../constants/validate.constants";
+import {ErrorMessages} from "../../constants/errorMessage.constants";
+import {HttpStatuses} from "../../constants/httpStatusCode.constants";
+import {MaxLengthVideoAuthor, MaxLengthVideoTitle} from "../../constants/validate.constants";
 
-import {OutputErrorsType} from "../types/output-errors-type";
-import {InputVideoBodyType, OutputVideoType, Resolutions} from "../types/video-types";
+import {OutputErrorsType} from "../../types/output-errors-type";
+import {InputVideoBodyType, OutputVideoType, Resolutions} from "../../types/video-types";
 
 
 const inputValidation = (video: InputVideoBodyType) => {

@@ -1,10 +1,10 @@
 import {Request, Response} from 'express'
 
-import {db} from '../db/db'
+import {db} from '../../db/db'
 
-import {OutputVideoType} from "../types/video-types";
+import {OutputVideoType} from "../../types/video-types";
 
-import {HttpStatuses} from "../constants/httpStatusCode.constants";
+import {HttpStatuses} from "../../constants/httpStatusCode.constants";
 
 
 //TODO: fix types

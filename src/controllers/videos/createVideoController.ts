@@ -17,7 +17,7 @@ const inputValidation = (video: CreateVideoInputModel) => {
 
     if (!Array.isArray(video.availableResolutions) || video.availableResolutions.find(r => !Resolutions[r])) {
         errors.errorsMessages.push({
-            message: ErrorMessages.UnknownError, field: 'availableResolution'
+            message: ErrorMessages.UnknownError, field: 'availableResolutions'
         })
     }
 

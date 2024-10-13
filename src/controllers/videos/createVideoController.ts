@@ -1,4 +1,4 @@
-import {Response, Request} from 'express'
+import {Request, Response} from 'express'
 
 import {db} from '../../db/db'
 
@@ -7,15 +7,15 @@ import {HttpStatuses} from "../../constants/httpStatusCode.constants";
 import {MaxLengthVideoAuthor, MaxLengthVideoTitle} from "../../constants/validate.constants";
 
 import {OutputErrorsType} from "../../types/output-errors-type";
-import {InputVideoBodyType, OutputVideoType, Resolutions} from "../../types/video-types";
+import {CreateVideoInputModel, OutputVideoType, Resolutions} from "../../types/video-types";
 
 
-const inputValidation = (video: InputVideoBodyType) => {
+const inputValidation = (video: CreateVideoInputModel) => {
     const errors: OutputErrorsType = {
         errorsMessages: []
     }
 
-    if (!Array.isArray(video.availableResolution) || video.availableResolution.find(r => !Resolutions[r])) {
+    if (!Array.isArray(video.availableResolutions) || video.availableResolutions.find(r => !Resolutions[r])) {
         errors.errorsMessages.push({
             message: ErrorMessages.UnknownError, field: 'availableResolution'
         })
@@ -36,10 +36,12 @@ const inputValidation = (video: InputVideoBodyType) => {
     return errors
 }
 
-export const createVideoController = (req: Request<any, any, InputVideoBodyType>, res: Response<OutputVideoType | OutputErrorsType>) => {
+export const createVideoController = (req: Request<any, any, CreateVideoInputModel>, res: Response<OutputVideoType | OutputErrorsType>) => {
     const errors = inputValidation(req.body)
     if (errors.errorsMessages.length) {
         res.status(HttpStatuses.BadRequest400).json(errors)
+
+        console.log(errors, 'errors')
         return
     }
 
@@ -50,12 +52,14 @@ export const createVideoController = (req: Request<any, any, InputVideoBodyType>
 
     const newVideo: OutputVideoType = {
         ...req.body,
-        id: Date.now() + Math.random(),
+        id: Date.now(),
         canBeDownloaded: false, // Default value
         minAgeRestriction: null, //  Default value
         createdAt: currentDate.toISOString(),
         publicationDate: publicationDate.toISOString(),
     }
+
+    console.log(newVideo, 'newVideo')
 
     db.videos = [...db.videos, newVideo]
 

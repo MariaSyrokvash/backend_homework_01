@@ -33,13 +33,13 @@ const inputValidation = (video: UpdateVideoInputModel) => {
         })
     }
 
-    if (video.availableResolution !== null) { // Проверяем, что поле не null
-        if (!video.availableResolution || video.availableResolution.length === 0) {
+    if (video.availableResolutions !== null) { // Проверяем, что поле не null
+        if (!video.availableResolutions || video.availableResolutions.length === 0) {
             errors.errorsMessages.push({
                 message: 'At least one resolution should be added', field: 'availableResolutions'
             });
         } else {
-            const invalidResolutions = video.availableResolution.filter(resolution =>
+            const invalidResolutions = video.availableResolutions.filter(resolution =>
                 !Object.values(Resolutions).includes(resolution)
             );
 

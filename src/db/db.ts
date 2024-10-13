@@ -14,7 +14,7 @@ const mockVideos: OutputVideoType[] = [
         minAgeRestriction: null,
         createdAt: "2023-10-01T14:00:00Z",
         publicationDate: "2023-10-02T12:00:00Z",
-        availableResolution: [Resolutions.P360, Resolutions.P480, Resolutions.P720, Resolutions.P1080],
+        availableResolutions: [Resolutions.P360, Resolutions.P480, Resolutions.P720, Resolutions.P1080],
     },
     {
         id: 2,
@@ -24,7 +24,7 @@ const mockVideos: OutputVideoType[] = [
         minAgeRestriction: 12,
         createdAt: "2023-09-25T10:30:00Z",
         publicationDate: "2023-09-26T09:00:00Z",
-        availableResolution: [Resolutions.P480, Resolutions.P720],
+        availableResolutions: [Resolutions.P480, Resolutions.P720],
     },
     {
         id: 3,
@@ -34,7 +34,7 @@ const mockVideos: OutputVideoType[] = [
         minAgeRestriction: null,
         createdAt: "2023-08-15T08:00:00Z",
         publicationDate: "2023-08-16T10:00:00Z",
-        availableResolution: [Resolutions.P144, Resolutions.P240, Resolutions.P360, Resolutions.P480],
+        availableResolutions: [Resolutions.P144, Resolutions.P240, Resolutions.P360, Resolutions.P480],
     },
     {
         id: 4,
@@ -44,7 +44,7 @@ const mockVideos: OutputVideoType[] = [
         minAgeRestriction: 16,
         createdAt: "2023-07-22T13:15:00Z",
         publicationDate: "2023-07-23T11:00:00Z",
-        availableResolution: [Resolutions.P720, Resolutions.P1080, Resolutions.P1440],
+        availableResolutions: [Resolutions.P720, Resolutions.P1080, Resolutions.P1440],
     },
     {
         id: 5,
@@ -54,7 +54,7 @@ const mockVideos: OutputVideoType[] = [
         minAgeRestriction: null,
         createdAt: "2023-10-05T16:45:00Z",
         publicationDate: "2023-10-06T09:30:00Z",
-        availableResolution: [Resolutions.P360, Resolutions.P480],
+        availableResolutions: [Resolutions.P360, Resolutions.P480],
     }
 ];
 
